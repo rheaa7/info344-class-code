@@ -102,7 +102,6 @@ app.get('/signout', function(req, res) {
 //subdirectory (any user can see these)
 app.use(express.static(__dirname + '/static/public'));
 
-
 //add a middleware function to verify that the user is
 //authenticated: if so, continue processing; if not,
 //redirect back to the home page
@@ -116,13 +115,6 @@ app.use(function(req, res, next) {
 //is added after the check above, express will never call it
 //if the function above doesn't call next()
 app.use(express.static(__dirname + '/static/secure'));
-
-//api route protected by middleware (determine displayname, fill out user profile form, api route that return user info
-//and post updates)
-app.get('/api/v1/users/me', function(req, res) {
-    //req.user is currently authenticated user
-    res.json(req.user); //full user object from Github, passed to the done function
-});
 
 //start the server
 app.listen(80, function() {
